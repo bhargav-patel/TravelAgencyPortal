@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+{% load staticfiles %}
+<html>
+<head>
+	<title>Travel Agency Portal</title>
+	<meta author="Bhargav Patel">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" href="{% static 'bower_components/bootstrap/dist/css/bootstrap.min.css'%}">
+	<link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/dist/css/ripples.min.css'%}">
+	<link rel="stylesheet" href="{% static 'bower_components/bootstrap-material-design/dist/css/material-fullpalette.min.css'%}">
+	<style>
+		html,body{
+			background:url({% static 'img/bg.png' %});
+		}
+	</style>
+	{% block css%}{% endblock %}
+</head>
+<body>
+{% include "nav.html" %}
+
+<div class="container-fluid">
+<div class="row">
+	<div class="col-md-5 col-md-offset-4">
+		{% if messages %}
+		<ul class="messages">
+		    {% for message in messages %}
+		    <div class="alert alert-dismissable alert-warning">
+				<button type="button" class="close" data-dismiss="alert">x</button>
+				<p>{{message}}</p>
+			</div>
+		    {% endfor %}
+		</ul>
+		{% endif %}
+	</div>
+</div>
+		
+{% block content %}{% endblock %}
+</div>
+
+<script src="{% static 'bower_components/jquery/dist/jquery.min.js'%}"></script>
+<script src="{% static 'bower_components/bootstrap/dist/js/bootstrap.min.js'%}"></script>
+<script src="{% static 'bower_components/bootstrap-material-design/dist/js/ripples.min.js'%}"></script>
+<script src="{% static 'bower_components/bootstrap-material-design/dist/js/material.min.js'%}"></script>
+<script>
+  $.material.init();
+</script>
+{% block js%}
+{% endblock %}
+</body>
+</html>

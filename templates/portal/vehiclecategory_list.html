@@ -1,0 +1,60 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+		<div class="row">
+			<div class="col-md-8">
+				<h3>Vehicle Categories</h3>
+			</div>
+			{% if user.is_staff %}
+				<div class="col-md-4">
+					<a class="btn btn-info btn-sm" href="{%url 'cat_new' %}">Add New Category</a>
+				</div>
+			{% endif %}
+		</div>
+    </div>
+    <div class="panel-body">		
+		<table class="table table-striped table-hover ">
+			<thead>
+				<tr>
+					<th class="pointer">Company</th>
+					<th class="pointer">Model</th>
+					<th class="pointer">Per Day Charge</th>
+					<th class="pointer">Per Km Charge</th>
+					<th class="pointer">AC</th>
+					<th class="pointer">Vehicles</th>
+					{% if user.is_staff %}
+						<th class="pointer">Manage</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for cat in object_list %}
+					<tr>
+						<td >{{ cat.company_name }}</td>
+						<td ><a href="/portal/category/{{cat.id }}">{{ cat.model }}</a></td>
+						<td >{{ cat.per_Day_Charge }}</td>
+						<td >{{ cat.per_Km_Charge }}</td>		
+						<td >
+							{% if cat.AC %}
+								<i class="mdi-action-done"></i>
+							{% else %}
+								<i class="mdi-navigation-close"></i>			
+							{% endif %}
+						</td>		
+						<td >
+							<a class="btn btn-info btn-sm" href="{%url 'veh_filtered_list' cat.id %}">{{ cat.vehicle_set.all | length }} Vehicles</a>
+						</td>
+						{% if user.is_staff %}
+							<td >
+								<a class="btn btn-primary btn-sm" href="{%url 'cat_edit' cat.id %}">Edit</a>
+								<a class="btn btn-danger btn-sm" href="{%url 'cat_delete' cat.id %}">Delete</a>
+							</td>
+						{% endif %}			
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+    </div>
+</div>
+{% endblock %}

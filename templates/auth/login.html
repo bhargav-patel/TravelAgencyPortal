@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+	<div class="col-md-5 col-md-offset-4">
+		{% if error %}
+			{% include 'auth/error.html'%}
+		{% endif %}
+		<div class="well bs-component">
+			<form action="{% url 'login' %}{% if next %}?next={{next}}{%endif%}" method="post" class="form-horizontal">
+				{% csrf_token %}
+				<fieldset>
+					<legend>LogIn</legend>
+					<br />
+					{% for field in form %}
+						{% include 'auth/field.html'%}
+					{% endfor %}
+					<br />
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-8 col-md-offset-4">
+								<a class="btn btn-default" href="{%url 'login'%}">Reset</a>
+								<button type="submit" class="btn btn-primary">LogIn</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

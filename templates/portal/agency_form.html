@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+{% load crispy_forms_tags %} 
+{% block content %}
+<div class="row">
+	<div class="col-md-5 col-md-offset-4">
+		{% if error %}
+			{% include 'auth/error.html'%}
+		{% endif %}
+		<div class="well bs-component">
+			<form method="post" class="form-horizontal">
+				{% csrf_token %}
+				<fieldset>
+					<legend>Modify Agency Rules</legend>
+					<br />
+					{{form | crispy}}
+					<br />
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-8 col-md-offset-4">
+								<a class="btn btn-default" href="{%url 'agency_edit' 1%}">Reset</a>
+								<button type="submit" class="btn btn-primary">Save</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

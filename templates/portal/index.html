@@ -1,0 +1,20 @@
+﻿{% extends "base.html" %}
+{% load crispy_forms_tags %} 
+{% block content %}
+<div class="row">
+	<div class="col-md-5 col-md-offset-4">
+		<div class="well bs-component">
+			<ul class="nav nav-pills nav-stacked">
+				<li class="active"><a class="btn btn-primary" href="{% url 'veh_list' %}">Search Available Vehicles</a></li>
+				<li class="active"><a class="btn btn-primary" href="{% url 'booking_list' %}">View Booking History</a></li>
+				<li class="active"><a class="btn btn-primary" href="{% url 'profile_edit' user.id %}">Edit Profile</a></li>
+				{% if user.is_staff %}
+					<li class="active"><a class="btn btn-primary" href="{% url 'veh_list' %}">Manage Vehicles</a></li>
+					<li class="active"><a class="btn btn-primary" href="{% url 'cat_list' %}">Manage Vehicle Categories</a></li>
+					<li class="active"><a class="btn btn-primary" href="{% url 'agency_edit' 1 %}">Update Agency Rules</a></li>
+				{% endif %}
+			</ul>
+		</div>
+	</div>
+</div>
+{% endblock %}

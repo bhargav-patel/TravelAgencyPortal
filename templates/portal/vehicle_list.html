@@ -1,0 +1,64 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="panel panel-primary">
+    <div class="panel-heading">
+		<div class="row">
+			<div class="col-md-8">
+				<h3>Available Vehicles</h3>
+			</div>
+			{% if user.is_staff %}
+				<div class="col-md-4">
+					<a class="btn btn-info btn-sm" href="{%url 'veh_new' %}">Add New Vehicle</a>
+				</div>
+			{% endif %}
+		</div>
+    </div>
+    <div class="panel-body">		
+		<table class="table table-striped table-hover ">
+			<thead>
+				<tr>
+					<th class="pointer">Company & Model</th>
+					<th class="pointer">Registration Number</th>
+					<th class="pointer">Per Day Charge</th>
+					<th class="pointer">Per Km Charge</th>
+					<th class="pointer">AC</th>
+					<th class="pointer">Availability</th>
+					{% if user.is_staff %}
+						<th class="pointer">Manage</th>
+					{% endif %}
+				</tr>
+			</thead>
+			<tbody>
+				{% for veh in object_list %}
+					<tr>
+						<td ><a href="/portal/category/{{veh.vehicle_Category.id }}">{{ veh.vehicle_Category.company_name }} {{ veh.vehicle_Category.model }}</a></td>
+						<td ><a href="/portal/vehicle/{{veh.id }}">{{ veh.registartion_Number }}</a></td>
+						<td >{{ veh.vehicle_Category.per_Day_Charge }}</td>
+						<td >{{ veh.vehicle_Category.per_Km_Charge }}</td>		
+						<td >
+							{% if veh.vehicle_Category.AC %}
+								<i class="mdi-action-done"></i>
+							{% else %}
+								<i class="mdi-navigation-close"></i>			
+							{% endif %}
+						</td>			
+						<td >
+							{% if veh.available %}
+								<a class="btn btn-primary btn-sm" href="{%url 'book' veh.id %}">Book</a>
+							{% else %}
+								<a class="btn btn-primary btn-sm disabled" href="{%url 'book' veh.id %}">Booked</a>
+							{% endif %}
+						</td>
+						{% if user.is_staff %}	
+							<td >
+								<a class="btn btn-info btn-sm" href="{%url 'veh_edit' veh.id %}">Edit</a>
+								<a class="btn btn-danger btn-sm" href="{%url 'veh_delete' veh.id %}">Delete</a>
+							</td>				
+						{% endif %}
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+    </div>
+</div>
+{% endblock %}

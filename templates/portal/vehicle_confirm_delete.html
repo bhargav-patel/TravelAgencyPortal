@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+	<div class="col-md-5 col-md-offset-4">
+		{% if error %}
+			{% include 'auth/error.html'%}
+		{% endif %}
+		<div class="well bs-component">
+			<form method="post" class="form-horizontal">
+				{% csrf_token %}
+				<fieldset>
+					<legend>Are you sure you want to Remove Vehicle "{{ object }}" ?</legend>
+					<br />
+					<a class="btn btn-default" href="{%url 'cat_list'%}">No</a>
+					<button type="submit" class="btn btn-primary">Yes</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}

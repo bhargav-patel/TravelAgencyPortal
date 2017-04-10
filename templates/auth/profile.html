@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="row">
+	<div class="col-md-5 col-md-offset-4">
+		<div class="well bs-component">
+			{% if profile %}
+	        <h1>{{ user.username }} welcome to your profile page</h1>
+	        <img src="{{ user.userprofile.profile_picture.url }}" width = "150" height = "150"  />
+	        <h2>asdasd</h2>
+	        <h2>{{ profile.user.email }}</h2>
+	        <h2>{{ profile.user.second_name }}</h2>
+	        <h2>{{ profile.user.user_country }}</h2>
+	        {{profile.user.username}}
+	        {% endif %}
+		</div>
+	</div>
+</div>
+{% endblock %}

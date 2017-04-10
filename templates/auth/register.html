@@ -1,0 +1,37 @@
+﻿{% extends "base.html" %}
+{% block content %}
+<div class="row">
+	<div class="col-md-5 col-md-offset-4">
+		{% for error in userform.non_field_errors %}
+			{% include 'auth/error.html'%}
+		{% endfor %}
+		{% for error in userprofileform.non_field_errors %}
+			{% include 'auth/error.html'%}
+		{% endfor %}
+		<div class="well bs-component">
+			<form action={% url 'register' %} method="post" class="form-horizontal">
+				{% csrf_token %}
+				<fieldset>
+					<legend>Register</legend>
+					<br />
+					{% for field in userform %}
+						{% include 'auth/field.html'%}
+					{% endfor %}
+					{% for field in userprofileform %}
+						{% include 'auth/field.html'%}
+					{% endfor %}
+					<br />
+					<div class="form-group">
+						<div class="row">
+							<div class="col-md-8 col-md-offset-6">
+								<a class="btn btn-default" href="{%url 'register'%}">Reset</a>
+								<button type="submit" class="btn btn-primary">Register</button>
+							</div>
+						</div>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
+{% endblock %}
